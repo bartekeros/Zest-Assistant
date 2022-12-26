@@ -1,0 +1,8 @@
+# ninja log v5
+8	115	6937843192800052	CMakeFiles/Zest.dir/help.c.obj	e2e325324bfc9aea
+2	106	6937843192700034	CMakeFiles/Zest.dir/main.c.obj	562dbc944ba9c31
+115	245	6937843194025278	Zest.exe	97351ef38bdd73b7
+2	87	6937838474433073	CMakeFiles/Zest.dir/initializePaths.c.obj	4535d4f65abeefb8
+2	181	6937869280567294	CMakeFiles/Zest.dir/main.c.obj	562dbc944ba9c31
+9	185	6937869280607267	CMakeFiles/Zest.dir/library.c.obj	fcfd281427ae8cbf
+185	367	6937869282396246	Zest.exe	5723a2a0b0fb142
