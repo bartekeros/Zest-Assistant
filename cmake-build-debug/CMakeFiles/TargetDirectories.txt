@@ -1,0 +1,3 @@
+C:/Users/barte/Documents/GitHub/Zest-Assistant/cmake-build-debug/CMakeFiles/Zest.dir
+C:/Users/barte/Documents/GitHub/Zest-Assistant/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/barte/Documents/GitHub/Zest-Assistant/cmake-build-debug/CMakeFiles/rebuild_cache.dir

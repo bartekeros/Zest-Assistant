@@ -1,0 +1,4 @@
+You are using Zest Assistant
+-E [level_number] - open current level notes to edit
+-I [level_number] - open current level image to edit
+-IE [level_number] - open current level notes and image to edit
