@@ -1,7 +1,7 @@
 #include "initializePaths.h"
-#include <dirent.h>
-#include <errno.h>
+#include "library.h"
 #include <stdio.h>
+#include <dirent.h>
 
 void Initialize(){
     CreateZestFolder();
@@ -9,18 +9,12 @@ void Initialize(){
 }
 
 void CreateZestFolder(){
-    DIR *dir = opendir("Zest");
-    if(dir == 0){
+    if(isFolderExisting("Zest") == false){
         mkdir("Zest");
-        closedir(dir);
     }
-    else if(ENOENT == errno){
-        closedir(dir);
-    }
-    closedir(dir);
 }
 
 void CreateLinksFile(){
-    FILE *file = fopen("Zest/links.txt", "w");
+    FILE *file = fopen("Zest/links.txt", "a");
     fclose(file);
 }

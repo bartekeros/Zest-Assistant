@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 
-bool isNumber(char*[]);
+bool isNumber(char[]);
+bool isFolderExisting(char[]);
 
 #endif
