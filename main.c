@@ -6,6 +6,8 @@
 #include "library.h"
 #include "opener.h"
 
+const char linksFile[] = "Zest/links.txt";
+
 int main(int argc, char *argv[]){
     Initialize();
     if(argc == 2){

@@ -5,5 +5,6 @@
 
 bool isNumber(char[]);
 bool isFolderExisting(char[]);
+char* getURL();
 
 #endif
