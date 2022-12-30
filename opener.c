@@ -7,6 +7,7 @@
 #include <ctype.h>
 
 extern char linksFile[];
+const char gimp[] = "\"C:/Program Files/GIMP 2/bin/gimp-2.10.exe\"";
 
 void openLevelTextFile(int number){
     char path[100];
@@ -43,27 +44,9 @@ void openLevelTextFile(int number){
 
 }
 
-//assumption: %d.txt without letters
 void openCurrentLevelTextFile(){
-    DIR *dir = opendir("Zest/.");
-    struct dirent *entry;
-    int current_level = 0;
 
-    if(dir == NULL)
-    {
-        printf("Couldn't find current level text file");
-        return;
-    }
-
-    char level_num[4];
-    while((entry = readdir(dir)) != NULL){
-            int i = 0;
-            while(isdigit(entry->d_name[i]) > 0){
-                level_num[i] = entry->d_name[i];
-                i++;
-            }
-            if(atoi(level_num) > current_level) current_level = atoi(level_num);
-    }
+    int current_level = currentLevel();
 
     if(current_level > 0) {
         char command[100];
@@ -73,13 +56,38 @@ void openCurrentLevelTextFile(){
     else{
         fprintf(stdout, "%s\n", "None of level seems to appear in your directory.");
     }
-    closedir(dir);
 }
 
-void openLevelImage(int number){
+void openLevelImage(int level){
+    char path[100];
+    char command[100];
 
-}
+    if(level > 0){
+        sprintf(path, "Zest/%d/." , level);
 
-void openCurrentLevelImage(){
+        DIR *dir = opendir(path);
+        struct dirent *entry;
 
+        while((entry = readdir(dir)) != NULL){
+            if(strstr(entry->d_name, ".jpg") != NULL){
+                sprintf(path, "%s/%s", path, entry->d_name);
+                sprintf(command, "%s %s", gimp, path);
+                system(command);
+            }
+        }
+    }
+    else if(level == 0){
+        sprintf(path, "Zest/%d/." , currentLevel());
+
+        DIR *dir = opendir(path);
+        struct dirent *entry;
+
+        while((entry = readdir(dir)) != NULL){
+            if(strstr(entry->d_name, ".jpg") != NULL){
+                sprintf(path, "%s/%s", path, entry->d_name);
+                sprintf(command, "%s %s", gimp, path);
+                system(command);
+            }
+        }
+    }
 }

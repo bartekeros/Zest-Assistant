@@ -6,5 +6,7 @@
 bool isNumber(char[]);
 bool isFolderExisting(char[]);
 char* getURL();
+int currentLevel();
+bool isLevelExisting(int);
 
 #endif

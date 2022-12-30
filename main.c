@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include "help.h"
 #include "initializePaths.h"
 #include "library.h"
 #include "opener.h"
+#include "image.h"
 
 const char linksFile[] = "Zest/links.txt";
 
@@ -18,10 +20,35 @@ int main(int argc, char *argv[]){
         {
             openCurrentLevelTextFile();
         }
+        else if(!strcmp(argv[1], "-I"))
+        {
+            openLevelImage(0);
+        }
+        else if(!strcmp(argv[1], "-IE"))
+        {
+            openCurrentLevelTextFile();
+            openLevelImage(0);
+        }
     }
     else if(argc == 3){
         if(!strcmp(argv[1],"-E") && isNumber(argv[2])){
             openLevelTextFile(atoi(argv[2]));
+        }
+        else if(!strcmp(argv[1], "-A") && !access(argv[2], F_OK)){
+            importImage(argv[2], 0);
+        }
+        else if(!strcmp(argv[1], "-I") && isNumber(argv[2]))
+        {
+            openLevelImage(atoi(argv[2]));
+        }
+        else if(!strcmp(argv[1], "-IE") && isNumber(argv[2])){
+            openLevelTextFile(atoi(argv[2]));
+            openLevelImage(atoi(argv[2]));
+        }
+    }
+    else if(argc == 4){
+        if(!strcmp(argv[1], "-A") && !access(argv[2], F_OK) && isNumber(argv[3])){
+            importImage(argv[2], atoi(argv[3]));
         }
     }
 
