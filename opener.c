@@ -5,7 +5,6 @@
 #include <libgen.h>
 #include <stdlib.h>
 #include <pthread.h>
-#include <ctype.h>
 
 extern char linksFile[];
 const char gimp[] = "\"C:/Program Files/GIMP 2/bin/gimp-2.10.exe\"";
