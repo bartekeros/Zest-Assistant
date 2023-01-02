@@ -1,0 +1,2 @@
+1 https://zest.riddlehell.net/zest_riddle/deartoy.htm
+19 https://pubs.opengroup.org/onlinepubs/007904975/functions/basename.html
