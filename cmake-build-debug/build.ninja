@@ -85,6 +85,12 @@ build CMakeFiles/Zest.dir/image.c.obj: C_COMPILER__Zest_Debug C$:/Users/barte/Do
   OBJECT_DIR = CMakeFiles\Zest.dir
   OBJECT_FILE_DIR = CMakeFiles\Zest.dir
 
+build CMakeFiles/Zest.dir/sort.c.obj: C_COMPILER__Zest_Debug C$:/Users/barte/Documents/GitHub/Zest-Assistant/sort.c || cmake_object_order_depends_target_Zest
+  DEP_FILE = CMakeFiles\Zest.dir\sort.c.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu99
+  OBJECT_DIR = CMakeFiles\Zest.dir
+  OBJECT_FILE_DIR = CMakeFiles\Zest.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Zest
@@ -93,7 +99,7 @@ build CMakeFiles/Zest.dir/image.c.obj: C_COMPILER__Zest_Debug C$:/Users/barte/Do
 #############################################
 # Link the executable Zest.exe
 
-build Zest.exe: C_EXECUTABLE_LINKER__Zest_Debug CMakeFiles/Zest.dir/main.c.obj CMakeFiles/Zest.dir/help.c.obj CMakeFiles/Zest.dir/initializePaths.c.obj CMakeFiles/Zest.dir/library.c.obj CMakeFiles/Zest.dir/opener.c.obj CMakeFiles/Zest.dir/image.c.obj
+build Zest.exe: C_EXECUTABLE_LINKER__Zest_Debug CMakeFiles/Zest.dir/main.c.obj CMakeFiles/Zest.dir/help.c.obj CMakeFiles/Zest.dir/initializePaths.c.obj CMakeFiles/Zest.dir/library.c.obj CMakeFiles/Zest.dir/opener.c.obj CMakeFiles/Zest.dir/image.c.obj CMakeFiles/Zest.dir/sort.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Zest.dir

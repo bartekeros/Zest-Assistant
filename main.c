@@ -7,11 +7,13 @@
 #include "library.h"
 #include "opener.h"
 #include "image.h"
+#include "sort.h"
 
 const char linksFile[] = "Zest/links.txt";
 
 int main(int argc, char *argv[]){
     Initialize();
+    sortLinksFile();
     if(argc == 1){
         PrintHelp();
     }
