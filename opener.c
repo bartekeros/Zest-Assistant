@@ -9,32 +9,19 @@
 extern char linksFile[];
 const char gimp[] = "\"C:/Program Files/GIMP 2/bin/gimp-2.10.exe\"";
 
+void createLevel(char*, int);
+
 void openLevelTextFile(int number){
     char path[100];
     char dirPath[100];
     sprintf(path, "Zest/%d/%d.txt", number, number);
     memcpy(dirPath, path, sizeof path);
 
-
     if(!isFolderExisting(dirname(dirPath))) {
-        char answer;
-        printf("Are you sure you want create folder for level %d? [Y/n] ", number);
-        answer = getchar();
-        if (answer == 'Y')
-            mkdir(dirPath);
-        else return;
-
-        char *url = malloc(100 * sizeof(char));
-        rewind(stdin);
-        do {
-            printf("Enter current level url\n");
-            url = getURL();
-        } while (strstr(url, ".htm") == NULL); //problem with regex, so very simple check
-
-        FILE *links = fopen(linksFile, "a");
-        fprintf(links, "%d %s\n", number, url);
-        fclose(links);
+        createLevel(dirPath, number);
     }
+
+    //create .txt file if doesn't exist
     FILE *level = fopen(path, "a");
     fclose(level);
 
@@ -42,6 +29,26 @@ void openLevelTextFile(int number){
     sprintf(command, "start notepad %s", path);
     system(command);
 
+}
+
+void createLevel(char* dirPath, int number){
+    char answer;
+    printf("Are you sure you want to create folder for level %d? [Y/n] ", number);
+    answer = getchar();
+    if (answer == 'Y')
+        mkdir(dirPath);
+    else return;
+
+    char *url = malloc(100 * sizeof(char));
+    rewind(stdin);
+    do {
+        printf("Enter current level url\n");
+        url = getURL();
+    } while (strstr(url, ".htm") == NULL); //problem with regex, so very simple check
+
+    FILE *links = fopen(linksFile, "a");
+    fprintf(links, "%d %s\n", number, url);
+    fclose(links);
 }
 
 void openCurrentLevelTextFile(){
@@ -54,13 +61,14 @@ void openCurrentLevelTextFile(){
         system(command);
     }
     else{
-        fprintf(stdout, "%s\n", "None of level seems to appear in your directory.");
+        fprintf(stdout, "%s\n", "None of levels seems to appear in your directory.");
     }
 }
 
 void openLevelImage(int level){
     char path[100];
     char command[100];
+    int counter = 0;
 
     if(level == 0)
         level = currentLevel();
@@ -75,8 +83,12 @@ void openLevelImage(int level){
                 sprintf(path, "%s/%s", path, entry->d_name);
                 sprintf(command, "%s %s", gimp, path);
                 system(command);
+                counter++;
             }
         }
+    }
+    if(counter == 0){
+        printf("There are no images in %d level\n", level);
     }
 }
 
@@ -89,7 +101,8 @@ void showLinks(){
 }
 
 void openLevelInBrowser(int level){
-    FILE *links = fopen("Zest/links.txt", "r");
+    FILE *links = fopen(linksFile, "r");
+    int counter = 0;
 
     if(level == 0)
         level = currentLevel();
@@ -105,9 +118,13 @@ void openLevelInBrowser(int level){
                 char command[100];
                 sprintf(command, "explorer %s", token);
                 system(command);
+                counter++;
             }
         }
     }
 
     fclose(links);
+    if(counter == 0){
+        printf("Couldn't open %d level in browser\n", level);
+    }
 }

@@ -3,7 +3,6 @@
 #include <stdbool.h>
 #include <dirent.h>
 #include <stdio.h>
-#include <errno.h>
 #include <malloc.h>
 #include <pthread.h>
 
