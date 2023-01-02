@@ -4,5 +4,7 @@
 void openLevelTextFile(int number);
 void openCurrentLevelTextFile();
 void openLevelImage(int number);
+void showLinks();
+void openLevelInBrowser(int);
 
 #endif

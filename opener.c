@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <libgen.h>
 #include <stdlib.h>
+#include <pthread.h>
 #include <ctype.h>
 
 extern char linksFile[];
@@ -39,7 +40,7 @@ void openLevelTextFile(int number){
     fclose(level);
 
     char command[100];
-    sprintf(command, "notepad %s", path);
+    sprintf(command, "start notepad %s", path);
     system(command);
 
 }
@@ -50,7 +51,7 @@ void openCurrentLevelTextFile(){
 
     if(current_level > 0) {
         char command[100];
-        sprintf(command, "notepad Zest/%d/%d.txt", current_level, current_level);
+        sprintf(command, "start notepad Zest/%d/%d.txt", current_level, current_level);
         system(command);
     }
     else{
@@ -62,6 +63,8 @@ void openLevelImage(int level){
     char path[100];
     char command[100];
 
+    if(level == 0)
+        level = currentLevel();
     if(level > 0){
         sprintf(path, "Zest/%d/." , level);
 
@@ -76,18 +79,36 @@ void openLevelImage(int level){
             }
         }
     }
-    else if(level == 0){
-        sprintf(path, "Zest/%d/." , currentLevel());
+}
 
-        DIR *dir = opendir(path);
-        struct dirent *entry;
+void showLinks(){
+    FILE *links = fopen("Zest/links.txt", "r");
+    char ch;
+    while((ch = getc(links)) != EOF)
+        putc(ch, stdout);
+    fclose(links);
+}
 
-        while((entry = readdir(dir)) != NULL){
-            if(strstr(entry->d_name, ".jpg") != NULL){
-                sprintf(path, "%s/%s", path, entry->d_name);
-                sprintf(command, "%s %s", gimp, path);
+void openLevelInBrowser(int level){
+    FILE *links = fopen("Zest/links.txt", "r");
+
+    if(level == 0)
+        level = currentLevel();
+    if(level > 0){
+        char line[100];
+        char substring[10];
+        sprintf(substring, "%d ", level);
+        while(fgets(line, 100, links)){
+            if(strstr(line, substring) != NULL){
+                char *token = strtok(line, " ");
+                token = strtok(NULL, " ");
+
+                char command[100];
+                sprintf(command, "explorer %s", token);
                 system(command);
             }
         }
     }
+
+    fclose(links);
 }

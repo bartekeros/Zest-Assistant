@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <errno.h>
 #include <malloc.h>
+#include <pthread.h>
 
 #define Max_Url_Size 100
 
