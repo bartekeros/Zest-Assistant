@@ -81,7 +81,7 @@ void openLevelImage(int level){
         while((entry = readdir(dir)) != NULL){
             if(strstr(entry->d_name, ".jpg") != NULL){
                 sprintf(path, "%s/%s", path, entry->d_name);
-                sprintf(command, "%s %s", gimp, path);
+                sprintf(command, "start \"\" %s %s", gimp, path);
                 system(command);
                 counter++;
             }
@@ -93,7 +93,7 @@ void openLevelImage(int level){
 }
 
 void showLinks(){
-    FILE *links = fopen("Zest/links.txt", "r");
+    FILE *links = fopen(linksFile, "r");
     char ch;
     while((ch = getc(links)) != EOF)
         putc(ch, stdout);
