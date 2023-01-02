@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <dirent.h>
 
+extern char linksFile[];
+
 void Initialize(){
     CreateZestFolder();
     CreateLinksFile();
@@ -15,6 +17,6 @@ void CreateZestFolder(){
 }
 
 void CreateLinksFile(){
-    FILE *file = fopen("Zest/links.txt", "a");
+    FILE *file = fopen(linksFile, "a");
     fclose(file);
 }

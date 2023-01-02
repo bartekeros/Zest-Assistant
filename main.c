@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -13,7 +12,10 @@ const char linksFile[] = "Zest/links.txt";
 
 int main(int argc, char *argv[]){
     Initialize();
-    if(argc == 2){
+    if(argc == 1){
+        PrintHelp();
+    }
+    else if(argc == 2){
         if(!strcmp(argv[1],"-h")){
             PrintHelp();
         }

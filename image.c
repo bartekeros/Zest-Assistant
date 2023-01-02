@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <libgen.h>
 
-//Kind of overloading
 void importImage(char *path, int level) {
     char command[100];
     if (level > 0) {
