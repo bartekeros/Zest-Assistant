@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <windows.h>
 #include "help.h"
 #include "initializePaths.h"
 #include "library.h"
@@ -29,6 +30,12 @@ int main(int argc, char *argv[]){
             openCurrentLevelTextFile();
             openLevelImage(0);
         }
+        else if(!strcmp(argv[1], "-L")){
+            showLinks();
+        }
+        else if(!strcmp(argv[1], "-O")){
+            openLevelInBrowser(0);
+        }
     }
     else if(argc == 3){
         if(!strcmp(argv[1],"-E") && isNumber(argv[2])){
@@ -45,12 +52,14 @@ int main(int argc, char *argv[]){
             openLevelTextFile(atoi(argv[2]));
             openLevelImage(atoi(argv[2]));
         }
+        else if(!strcmp(argv[1], "-O") && isNumber(argv[2])){
+            openLevelInBrowser(atoi(argv[2]));
+        }
     }
     else if(argc == 4){
         if(!strcmp(argv[1], "-A") && !access(argv[2], F_OK) && isNumber(argv[3])){
             importImage(argv[2], atoi(argv[3]));
         }
     }
-
     return 0;
 }
