@@ -1,11 +1,13 @@
 ## About the project
 Zest Assistant main purpose was to help Zest players access their notes in more organize way. The tool works as a terminal command.
+[Here](https://zest.riddlehell.net/) You can play the game. Have fun!
 
 ### Built with
 Pure C with CMake was used without any additional extensions.
 
 ## Getting Started
-Download the package with .exe file. Afterwards move .exe file wherever you want and add its path to $PATH variable, so you can run the program from any place.
+Download the released package. Afterwards extract and move the folder wherever you want. </br> 
+```Optional``` Add its .exe file path to $PATH variable, so you can run the program from any place.
 
 ### Prerequisites
 Works only on Windows.
