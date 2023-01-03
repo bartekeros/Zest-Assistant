@@ -1,6 +1,0 @@
-1 https://zest.riddlehell.net/zest_riddle/deartoy.htm
-2 https://zest.riddlehell.net/zest_riddle/deep.htm
-3 https://zest.riddlehell.net/zest_riddle/deeper.htm
-4 https://zest.riddlehell.net/zest_riddle/nothing.htm
-17 helloguys.htm
-19 https://pubs.opengroup.org/onlinepubs/007904975/functions/basename.html

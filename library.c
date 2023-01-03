@@ -63,7 +63,9 @@ int currentLevel(){
             level_num[i] = entry->d_name[i];
             i++;
         }
-        if(atoi(level_num) > current_level) current_level = atoi(level_num);
+        if(atoi(level_num) > current_level)
+            current_level = atoi(level_num);
+        memset(level_num, 0, 4);
     }
     closedir(dir);
     return current_level;

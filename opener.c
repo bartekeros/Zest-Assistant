@@ -9,7 +9,7 @@
 extern char linksFile[];
 const char gimp[] = "\"C:/Program Files/GIMP 2/bin/gimp-2.10.exe\"";
 
-void createLevel(char*, int);
+int createLevel(char*, int);
 
 void openLevelTextFile(int number){
     char path[100];
@@ -18,7 +18,9 @@ void openLevelTextFile(int number){
     memcpy(dirPath, path, sizeof path);
 
     if(!isFolderExisting(dirname(dirPath))) {
-        createLevel(dirPath, number);
+        if(createLevel(dirPath, number) == 0)
+            return;
+
     }
 
     //create .txt file if doesn't exist
@@ -31,13 +33,15 @@ void openLevelTextFile(int number){
 
 }
 
-void createLevel(char* dirPath, int number){
+//1 - success
+//0 - failure
+int createLevel(char* dirPath, int number){
     char answer;
     printf("Are you sure you want to create folder for level %d? [Y/n] ", number);
     answer = getchar();
     if (answer == 'Y')
         mkdir(dirPath);
-    else return;
+    else return 0;
 
     char *url = malloc(100 * sizeof(char));
     rewind(stdin);
@@ -49,6 +53,8 @@ void createLevel(char* dirPath, int number){
     FILE *links = fopen(linksFile, "a");
     fprintf(links, "%d %s\n", number, url);
     fclose(links);
+
+    return 1;
 }
 
 void openCurrentLevelTextFile(){
@@ -81,8 +87,9 @@ void openLevelImage(int level){
         while((entry = readdir(dir)) != NULL){
             if(strstr(entry->d_name, ".jpg") != NULL){
                 sprintf(path, "%s/%s", path, entry->d_name);
-                sprintf(command, "start \"\" %s %s", gimp, path);
+                sprintf(command, "start \"\" %s \"%s\"", gimp, path);
                 system(command);
+                sprintf(path, "Zest/%d/." , level);
                 counter++;
             }
         }
@@ -100,6 +107,7 @@ void showLinks(){
     fclose(links);
 }
 
+//accepts only the first occurrence of the pattern
 void openLevelInBrowser(int level){
     FILE *links = fopen(linksFile, "r");
     int counter = 0;
@@ -116,14 +124,17 @@ void openLevelInBrowser(int level){
                 token = strtok(NULL, " ");
 
                 char command[100];
-                sprintf(command, "explorer %s", token);
+                sprintf(command, "explorer \"%s\"", token);
                 system(command);
                 counter++;
+
+                fclose(links);
+                return;
             }
         }
     }
 
-    fclose(links);
+
     if(counter == 0){
         printf("Couldn't open %d level in browser\n", level);
     }

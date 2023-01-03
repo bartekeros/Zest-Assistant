@@ -14,18 +14,21 @@ struct Level{
 struct Level* createList();
 void addEntry(struct Level**, int, char*);
 void display(struct Level*);
+void freeList(struct Level*);
 extern char linksFile[];
 
 //structs was used only for educational purposes -> not efficient
 void sortLinksFile(){
-    struct Level *log = createList();
+    struct Level *lvl = createList(), *previous;
 
     FILE *links = fopen(linksFile, "w");
 
-    while(log != 0)
+    while(lvl != 0)
     {
-        fprintf(links, "%d %s", log->level, log->url);
-        log = log->next;
+        previous = lvl;
+        fprintf(links, "%d %s", lvl->level, lvl->url);
+        lvl = lvl->next;
+        free(previous);
     }
 
     fclose(links);
